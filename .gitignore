@@ -1,0 +1,35 @@
+﻿# Build artifacts
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
+
+# IDE-specific files and folders
+.vscode/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# .NET CLI/Tooling folders
+.config/
+.tools/
+
+# Test results and reports
+**/Results/
+*.trx
+*.coverage
+*.coveragexml
+
+# SpecFlow auto-generated files
+*.feature.cs
+*.Generated.cs
+
+# Logs
+*.log
+
+# OS/system files
+.DS_Store
+Thumbs.db

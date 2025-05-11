@@ -1,0 +1,44 @@
+﻿trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  IMAGE_NAME: restful-booker-tests
+
+stages:
+- stage: Test
+  jobs:
+  - job: RunTests
+    steps:
+    - task: UseDotNet@2
+      inputs:
+        packageType: sdk
+        version: '8.0.x'
+        installationPath: $(Agent.ToolsDirectory)/dotnet
+
+    - task: DockerInstaller@0
+      inputs:
+        dockerVersion: 'latest'
+
+    - script: |
+        echo "Building Docker image..."
+        docker build -t $(IMAGE_NAME) .
+
+        echo "Creating container..."
+        docker create --name test-container $(IMAGE_NAME)
+
+        echo "Copying Extent Report from container..."
+        docker cp test-container:/app/Results ./Results || echo "No Results folder found in container."
+
+        echo "Removing container..."
+        docker rm test-container
+      displayName: 'Run Docker Tests and Copy Report'
+
+    - task: PublishBuildArtifacts@1
+      condition: succeededOrFailed()
+      inputs:
+        pathtoPublish: 'Results'
+        artifactName: 'ExtentReport'
+        publishLocation: 'Container'

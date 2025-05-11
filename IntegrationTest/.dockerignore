@@ -1,0 +1,19 @@
+# Ignore git files
+.git
+.gitignore
+
+# Ignore local build outputs
+bin/
+obj/
+*.trx
+
+# Ignore user settings
+.vscode/
+*.user
+*.suo
+
+# Ignore test output
+Results/
+
+# Misc
+*.log
