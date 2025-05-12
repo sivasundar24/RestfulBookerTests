@@ -1,7 +1,5 @@
 ﻿using System.Text.Json;
 using IntegrationTest.Helpers;
-
-//using NUnit.Framework;
 using RestSharp;
 using TechTalk.SpecFlow;
 
@@ -32,7 +30,7 @@ namespace RestfulBookerTests.IntegrationTest.Steps
 
             if ((int)response.StatusCode != 200)
             {
-                TestContext.WriteLine("⚠ Skipping response body validation due to non-200 status.");
+                TestContext.WriteLine("Skipping response body validation due to non-200 status.");
                 return;
             }
 

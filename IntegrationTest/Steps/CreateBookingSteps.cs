@@ -10,21 +10,12 @@ public class CreateBookingSteps(ScenarioContext context)
 {
     private readonly ScenarioContext _context = context;
     private readonly RestClient _client = new(TestConfig.BaseUrl);
+    private readonly BookingHelper _bookingHelper = new(context);
 
     [When(@"I create a booking with the following details:")]
     public void WhenICreateABookingWithTheFollowingDetails(Table table)
     {
-        if (!_context.ContainsKey("token"))
-        {
-            var authRequest = new RestRequest("auth", Method.Post);
-            authRequest.AddHeader("Content-Type", "application/json");
-            authRequest.AddJsonBody(new { username = "admin", password = "password123" });
-
-            var authResp = _client.Execute(authRequest);
-            var token = JsonDocument.Parse(authResp.Content!).RootElement.GetProperty("token").GetString();
-            _context["token"] = token;
-        }
-
+       
         var row = table.Rows[0];
 
         var body = new
@@ -41,12 +32,7 @@ public class CreateBookingSteps(ScenarioContext context)
             additionalneeds = row["additionalneeds"]
         };
 
-        var request = new RestRequest("booking", Method.Post);
-        request.AddHeader("Content-Type", "application/json");
-        request.AddHeader("Accept", "application/json");
-        request.AddJsonBody(body);
-
-        var response = _client.Execute(request);
+        var response = _bookingHelper.CreateBookingWithBody(_client, body);
         _context["response"] = response;
     }
 
