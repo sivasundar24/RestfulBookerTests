@@ -74,8 +74,6 @@ If your feature files use tags like `@getbooking`, use:
 dotnet test --filter TestCategory=getbooking
 ```
 
-Make sure your `[Category("smoke")]` attribute is applied in the code or SpecFlow binding.
-
 ---
 
 ## Running Tests in Docker
@@ -119,8 +117,8 @@ Azure DevOps pipeline is included in `azure-pipelines.yml`. It:
 
 ## Author
 
-Developed by:Sivasundar Anbumani 
-QA Automation Engineer
+Developed by: Sivasundar Anbumani<br>
+**QA Automation Engineer**
 
 ---
 
