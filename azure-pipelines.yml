@@ -26,15 +26,15 @@ stages:
         echo "Building Docker image..."
         docker build -t $(IMAGE_NAME) .
 
-        echo "Creating container..."
-        docker create --name test-container $(IMAGE_NAME)
+        echo "Running tests in container..."
+        docker run --name test-container $(IMAGE_NAME)
 
         echo "Copying Extent Report from container..."
         docker cp test-container:/app/Results ./Results || echo "No Results folder found in container."
 
-        echo "Removing container..."
+        echo "Cleaning up container..."
         docker rm test-container
-      displayName: 'Run Docker Tests and Copy Report'
+      displayName: 'Run Docker Tests and Extract Report'
 
     - task: PublishBuildArtifacts@1
       condition: succeededOrFailed()
