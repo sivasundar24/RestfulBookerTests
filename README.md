@@ -1,6 +1,6 @@
 # Integration Test Framework for Restful-Booker APIs
 
-This project implements an automated **integration test framework** for validating the [Restful Booker](https://restful-booker.herokuapp.com/) APIs. The focus is on acceptance testing using Gherkin-style feature files with SpecFlow and .NET.
+This project implements an automated **integration test framework** for validating the [Restful Booker](https://restful-booker.herokuapp.com/apidoc/index.html#api-Ping-Ping) APIs. The focus is on acceptance testing using Gherkin-style feature files with SpecFlow and .NET.
 
 ---
 
